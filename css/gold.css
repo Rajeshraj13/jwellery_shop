@@ -1,0 +1,546 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E8C0;
+    --silver: #B0BEC5;
+    --silver-light: #ECEFF1;
+    --dark: #0E0E0E;
+    --dark2: #1A1A1A;
+    --dark3: #252525;
+    --cream: #FAF7F0;
+    --text-muted: #888;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  .sections-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+    gap: 0;
+  }
+
+  /* ══════════════════════════════
+     SECTION 1 – GMB
+  ══════════════════════════════ */
+  .gmb-section {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    padding: 48px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: default;
+  }
+
+  /* Decorative orb */
+  .gmb-section::before {
+    content: '';
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+    top: -80px; right: -100px;
+    pointer-events: none;
+    transition: transform 0.6s ease;
+  }
+  .gmb-section:hover::before { transform: scale(1.15); }
+
+  /* Fine grid overlay */
+  .gmb-section::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .gmb-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .gmb-label::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+
+  .gmb-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.15;
+    position: relative; z-index: 1;
+    margin-top: 24px;
+  }
+  .gmb-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* Star rating */
+  .gmb-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative; z-index: 1;
+    margin-top: 28px;
+  }
+  .stars {
+    display: flex;
+    gap: 3px;
+  }
+  .star {
+    width: 16px; height: 16px;
+    fill: var(--gold);
+  }
+  .star.half { fill: url(#halfGold); }
+  .gmb-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .gmb-count {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* Reviews carousel */
+  .gmb-reviews {
+    position: relative; z-index: 1;
+    margin-top: 28px;
+    overflow: hidden;
+    height: 90px;
+  }
+  .review-slide {
+    position: absolute; top: 0; left: 0; width: 100%;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+    pointer-events: none;
+  }
+  .review-slide.active {
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .review-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+    line-height: 1.6;
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+  }
+  .review-author {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  /* GMB CTA */
+  .gmb-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    position: relative; z-index: 1;
+    margin-top: 32px;
+  }
+  .btn-gmb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 13px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-gmb:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-gmb-outline {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-gmb-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  /* Review dots */
+  .review-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    position: relative; z-index: 1;
+  }
+  .rdot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.3);
+    transition: background 0.3s, width 0.3s;
+    cursor: pointer;
+  }
+  .rdot.active { background: var(--gold); width: 16px; border-radius: 3px; }
+
+  /* Info rows */
+  .gmb-info {
+    position: relative; z-index: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gmb-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+  .gmb-info-row svg { flex-shrink: 0; margin-top: 1px; }
+  .gmb-info-row a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  .gmb-info-row a:hover { color: var(--gold); }
+  .open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(74,222,128,0.12);
+    color: #4ade80;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 6px;
+  }
+  .open-dot { width: 5px; height: 5px; border-radius: 50%; background: #4ade80; animation: pulse-green 1.5s ease-in-out infinite; }
+
+  /* Social icons */
+  .gmb-social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative; z-index: 1;
+    margin-top: 16px;
+  }
+  .gmb-social-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .social-icon {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .social-icon:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* ══════════════════════════════
+     SECTION 2 – GOLD/SILVER RATES
+  ══════════════════════════════ */
+  .rates-section {
+    background: var(--cream);
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    border-left: 1px solid rgba(201,168,76,0.2);
+  }
+
+  /* subtle watermark */
+  .rates-section::before {
+    content: '₹';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 340px;
+    font-weight: 300;
+    color: rgba(201,168,76,0.06);
+    right: -40px; bottom: -60px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .rates-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rates-label::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--text-muted);
+  }
+
+  /* Live badge */
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0a0a0a;
+    color: #4ade80;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse-green 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .rates-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .rates-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+  .rates-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .rates-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* Metal cards */
+  .metals-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+    position: relative; z-index: 1;
+  }
+
+  .metal-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .metal-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  .metal-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .metal-card.gold-card::before { background: var(--gold); }
+  .metal-card.silver-card::before { background: var(--silver); }
+  .metal-card.platinum-card::before { background: #8E9EAB; }
+
+  .metal-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .metal-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .gold-card .metal-icon { background: rgba(201,168,76,0.12); }
+  .silver-card .metal-icon { background: rgba(176,190,197,0.18); }
+  .platinum-card .metal-icon { background: rgba(142,158,171,0.15); }
+
+  .metal-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+  }
+  .metal-unit {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 1px;
+    letter-spacing: 0.05em;
+  }
+
+  .metal-right {
+    text-align: right;
+  }
+  .metal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .metal-change {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 4px;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .change-up { background: #d1fae5; color: #065f46; }
+  .change-down { background: #fee2e2; color: #991b1b; }
+
+  /* Mini sparkline */
+  .sparkline {
+    margin-top: 4px;
+  }
+
+  /* Tabs: 22K / 24K toggle */
+  .karat-tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    width: fit-content;
+    margin-top: 6px;
+    margin-bottom: -4px;
+    position: relative; z-index: 1;
+  }
+  .karat-tab {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, color 0.2s;
+  }
+  .karat-tab.active {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* Last updated */
+  .rates-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    position: relative; z-index: 1;
+  }
+  .last-updated {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .refresh-btn:hover { color: var(--dark); }
+  .refresh-icon { display: inline-block; transition: transform 0.4s; }
+  .refresh-icon.spinning { animation: spin 0.5s linear; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .sections-wrap { grid-template-columns: 1fr; }
+    .rates-section { border-left: none; border-top: 1px solid rgba(201,168,76,0.2); }
+    .gmb-section, .rates-section { padding: 44px 28px; }
+  }
+
+  /* ─── Page label ─── */
+  .page-label {
+    text-align: center;
+    padding: 32px 0 8px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+  }
